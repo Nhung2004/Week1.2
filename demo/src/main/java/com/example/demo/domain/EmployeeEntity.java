@@ -33,6 +33,7 @@ public class EmployeeEntity {
     @Column(name = "age")
     private Integer age;
 
+    @NotBlank(message = "Mức lương không được để trống!")
     @Column(name = "salary")
     private BigDecimal salary;
 
