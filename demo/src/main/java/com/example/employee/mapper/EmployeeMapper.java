@@ -1,8 +1,8 @@
-package com.example.demo.mapper;
+package com.example.employee.mapper;
 
-import com.example.demo.domain.EmployeeEntity;
-import com.example.demo.dto.employee.EmployeeDTO;
-import com.example.demo.dto.employee.crud.EmployeeCreateDTO;
+import com.example.employee.domain.EmployeeEntity;
+import com.example.employee.dto.employee.EmployeeDTO;
+import com.example.employee.dto.employee.crud.EmployeeCreateDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

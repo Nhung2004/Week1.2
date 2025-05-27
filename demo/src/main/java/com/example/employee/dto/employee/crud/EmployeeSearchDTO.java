@@ -1,4 +1,4 @@
-package com.example.demo.dto.employee.crud;
+package com.example.employee.dto.employee.crud;
 
 import lombok.Getter;
 import lombok.Setter;

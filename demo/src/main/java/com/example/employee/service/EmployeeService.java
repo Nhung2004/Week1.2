@@ -1,17 +1,17 @@
-package com.example.demo.service;
+package com.example.employee.service;
 
-import com.example.demo.domain.EmployeeEntity;
-import com.example.demo.dto.ResponseDTO;
-import com.example.demo.dto.employee.EmployeeDTO;
-import com.example.demo.dto.employee.crud.EmployeeCreateDTO;
-import com.example.demo.dto.employee.crud.EmployeeSearchDTO;
-import com.example.demo.mapper.EmployeeMapper;
-import com.example.demo.repository.EmployeeRepository;
+import com.example.employee.domain.EmployeeEntity;
+import com.example.employee.dto.ResponseDTO;
+import com.example.employee.dto.employee.EmployeeDTO;
+import com.example.employee.dto.employee.crud.EmployeeCreateDTO;
+import com.example.employee.dto.employee.crud.EmployeeSearchDTO;
+import com.example.employee.mapper.EmployeeMapper;
+import com.example.employee.repository.EmployeeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,20 +58,20 @@ public class EmployeeService {
     }
 
 
-    public ResponseDTO<List<EmployeeDTO>> getAllEmployees() {
+    public ResponseDTO<List<EmployeeDTO>> getAllEmployees(Pageable pageable) {
         ResponseDTO<List<EmployeeDTO>> response = new ResponseDTO<>();
         try {
-            List<EmployeeEntity> employees = employeeRepository.findAll();
-            if (employees.isEmpty()) {
-                throw new Exception("No Employees Found");
-            }
-
-            List<EmployeeDTO> listEmployeeDto = employees.stream()
+            Page<EmployeeEntity> page = employeeRepository.findAll(pageable);
+            List<EmployeeDTO> listEmployeeDto = page.stream()
                     .map(employeeMapper::toDTO)
                     .collect(Collectors.toList());
 
             response.setData(listEmployeeDto);
             response.setMessage("Success");
+            response.setPage(page.getNumber());
+            response.setPageSize(page.getSize());
+            response.setTotalElement(page.getTotalElements());
+            response.setTotalPage(page.getTotalPages());
         } catch (Exception e) {
             response.setStatus("400");
             response.setMessage(e.getMessage());
