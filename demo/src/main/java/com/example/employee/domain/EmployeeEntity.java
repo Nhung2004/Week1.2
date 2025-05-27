@@ -41,7 +41,7 @@ public class EmployeeEntity {
 
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<EmployeeEntity> todos;
+    private List<ToDoEntity> todos;
 
 
 }

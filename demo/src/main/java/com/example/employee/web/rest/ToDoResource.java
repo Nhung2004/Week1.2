@@ -10,11 +10,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/todos")
-public class ToDoController {
+public class ToDoResource {
 
     private final ToDoService toDoService;
 
-    public ToDoController(ToDoService toDoService) {
+    public ToDoResource(ToDoService toDoService) {
         this.toDoService = toDoService;
     }
 
