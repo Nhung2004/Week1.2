@@ -1,5 +1,6 @@
 package com.example.employee.dto;
 
+import com.example.employee.enums.ToDoStatus;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import org.springframework.http.HttpStatus;
 public class ResponseDTO<T> {
     private T data;
 
-    private String status = String.valueOf(HttpStatus.OK.value()); // 200
+    private ToDoStatus status;
 
     private String message;
 
@@ -27,9 +28,6 @@ public class ResponseDTO<T> {
         return data;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
     public String getMessage() {
         return message;
@@ -51,9 +49,6 @@ public class ResponseDTO<T> {
         return totalElement;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public void setData(T data) {
         this.data = data;
@@ -79,4 +74,11 @@ public class ResponseDTO<T> {
         this.totalElement = totalElement;
     }
 
+    public ToDoStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ToDoStatus status) {
+        this.status = status;
+    }
 }

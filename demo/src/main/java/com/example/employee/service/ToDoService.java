@@ -6,6 +6,7 @@ import com.example.employee.domain.ToDoEntity;
 import com.example.employee.dto.ResponseDTO;
 import com.example.employee.dto.todo.ToDoDTO;
 import com.example.employee.dto.todo.crud.ToDoUpdateStatusDTO;
+import com.example.employee.enums.ToDoStatus;
 import com.example.employee.exception.ResourceNotFoundException;
 import com.example.employee.mapper.ToDoMapper;
 import com.example.employee.repository.EmployeeRepository;
@@ -44,8 +45,9 @@ public class ToDoService {
 
             response.setData(toDoMapper.toDTO(toDoEntity));
             response.setMessage("Success");
+            response.setStatus(ToDoStatus.COMPLETED);
         } catch (Exception e) {
-            response.setStatus("400");
+            response.setStatus(ToDoStatus.IN_PROGRESS);
             response.setMessage(e.getMessage());
         }
         return response;
@@ -61,8 +63,9 @@ public class ToDoService {
 
             response.setData(toDoDTOs);
             response.setMessage("Success");
+            response.setStatus(ToDoStatus.COMPLETED);
         } catch (Exception e) {
-            response.setStatus("400");
+            response.setStatus(ToDoStatus.CANCELLED);
             response.setMessage(e.getMessage());
         }
         return response;
@@ -75,8 +78,9 @@ public class ToDoService {
                     .orElseThrow(() -> new Exception("ToDo not found with id: " + id));
             toDoRepository.delete(toDoEntity);
             response.setMessage("Deleted successfully");
+            response.setStatus(ToDoStatus.COMPLETED);
         } catch (Exception e) {
-            response.setStatus("400");
+            response.setStatus(ToDoStatus.CANCELLED);
             response.setMessage(e.getMessage());
         }
         return response;
@@ -95,8 +99,9 @@ public class ToDoService {
             toDoRepository.save(existing);
             response.setData(toDoMapper.toDTO(existing));
             response.setMessage("Updated successfully");
+            response.setStatus(ToDoStatus.COMPLETED);
         } catch (Exception e) {
-            response.setStatus("400");
+            response.setStatus(ToDoStatus.PENDING);
             response.setMessage(e.getMessage());
         }
         return response;
