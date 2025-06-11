@@ -1,6 +1,7 @@
 package com.example.employee.dto;
 
 import com.example.employee.enums.ToDoStatus;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-@Data
+@Builder
 public class ResponseDTO<T> {
     private T data;
 
@@ -23,6 +24,8 @@ public class ResponseDTO<T> {
     private Integer totalPage;
 
     private Long totalElement;
+
+
 
     public T getData() {
         return data;

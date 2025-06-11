@@ -1,6 +1,6 @@
 package com.example.employee.repository;
 
-import com.example.employee.domain.EmployeeEntity;
+import com.example.employee.domain.employee.EmployeeEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import java.math.BigDecimal;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeEntity,String> {
+public interface EmployeeRepository extends JpaRepository<EmployeeEntity,Long> {
 
     @Query(value = "SELECT * FROM employee e " +
             "WHERE (:name IS NULL OR LOWER(REPLACE(e.name, ' ', '')) LIKE LOWER(CONCAT('%', REPLACE(:name, ' ', ''), '%'))) " +
@@ -25,9 +25,12 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity,String>
             @Param("age") Integer age,
             @Param("minSalary") BigDecimal minSalary,
             @Param("maxSalary") BigDecimal maxSalary,
-            @Param("department") String department,
-            Pageable pageable
+            @Param("department") String department
+            , Pageable pageable
     );
+
+
+
 
 
 }

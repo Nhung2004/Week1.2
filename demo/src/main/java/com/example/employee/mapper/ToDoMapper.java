@@ -1,7 +1,7 @@
 package com.example.employee.mapper;
 
 
-import com.example.employee.domain.ToDoEntity;
+import com.example.employee.domain.todo.ToDoEntity;
 import com.example.employee.dto.todo.ToDoDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

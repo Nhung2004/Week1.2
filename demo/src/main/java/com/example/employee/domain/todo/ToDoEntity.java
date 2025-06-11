@@ -1,5 +1,7 @@
-package com.example.employee.domain;
+package com.example.employee.domain.todo;
 
+import com.example.employee.domain.AbstractEntity;
+import com.example.employee.domain.employee.EmployeeEntity;
 import com.example.employee.enums.ToDoStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 @Table(name="todo")
-public class ToDoEntity {
+public class ToDoEntity extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +26,12 @@ public class ToDoEntity {
     private ToDoStatus status;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
+
+
 
     public Long getId() {
         return id;
@@ -44,12 +49,12 @@ public class ToDoEntity {
         this.task = task;
     }
 
-    public ToDoStatus getStatus(ToDoStatus status) {
+    public ToDoStatus getStatus() {
         return this.status;
     }
 
     public void setStatus(ToDoStatus status) {
-        this.status = status;
+        this.status = this.status;
     }
 
     public EmployeeEntity getEmployee() {

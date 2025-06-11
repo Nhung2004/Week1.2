@@ -1,6 +1,6 @@
 package com.example.employee.mapper;
 
-import com.example.employee.domain.EmployeeEntity;
+import com.example.employee.domain.employee.EmployeeEntity;
 import com.example.employee.dto.employee.EmployeeDTO;
 import com.example.employee.dto.employee.crud.EmployeeCreateDTO;
 import org.mapstruct.Mapper;
@@ -9,7 +9,6 @@ import org.mapstruct.Mapper;
 public interface EmployeeMapper {
 
     EmployeeCreateDTO toCreateDTO(EmployeeEntity entity);
-
 
     EmployeeDTO toDTO(EmployeeEntity entity);
 
