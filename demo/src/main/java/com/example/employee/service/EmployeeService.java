@@ -115,9 +115,10 @@ public class EmployeeService {
     }
 
     public ResponseDTO<List<EmployeeDTO>> searchEmployee(EmployeeSearchDTO searchDTO) {
-
+        int pageSize = Math.max(10, searchDTO.getPageSize());
+        int pageIndex = Math.max(0, searchDTO.getPageIndex());
         Sort sort = Sort.by(Sort.Direction.DESC, "age");
-        PageRequest pageRequest = PageRequest.of(searchDTO.getPageIndex(), searchDTO.getPageSize());
+        PageRequest pageRequest = PageRequest.of(pageIndex,pageSize, sort);
         Page<EmployeeEntity> employeeEntities = employeeRepository.searchEmployees(
                 searchDTO.getName(),
                 searchDTO.getAge(),
@@ -225,12 +226,12 @@ public class EmployeeService {
 //                .build();
 //    }
 
-    //@Transactional
+    @Transactional
     public ResponseDTO<Void> updateEmployeeAndUpdateTodo(Long id){
         EmployeeEntity employeeEntity = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee không tồn tại " + id));
 
-        employeeEntity.setName("Hungdz");
+        employeeEntity.setName(employeeEntity.getName()+"dz lan 2");
         employeeEntity.setAge(employeeEntity.getAge() + 1);
         employeeRepository.save(employeeEntity);
 

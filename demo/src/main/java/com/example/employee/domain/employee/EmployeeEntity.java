@@ -45,7 +45,7 @@ public class EmployeeEntity {
     @Column(name="image_name")
     private String imageName;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<ToDoEntity> todos;
 
 
